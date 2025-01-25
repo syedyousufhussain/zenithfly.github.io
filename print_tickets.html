@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome tickets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Boarding Pass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .boarding-pass {
+            margin-top: 10rem;
+        height: 120vh;
+            width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 2px solid #ddd;
+        }
+
+        .header {
+            background-color: #0b0234;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .image-container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header img {
+            width: 5rem;
+            height: 3.5rem;
+            padding: 0.4rem 1rem 1rem 0.1rem;
+        }
+
+        .flight-details {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .passenger-details {
+            padding: 20px;
+        }
+
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .details-row span {
+            font-weight: bold;
+        }
+
+        .barcode {
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .barcode img {
+            width: 50%;
+            height: 20vh;
+        }
+
+        .airplane-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boarding-pass">
+        <div class="header">
+            <img src="../assets/images/logo-removebg-preview.png" alt="Airplane Icon" class="airplane-icon">
+            Boarding Pass
+        </div>
+        <div style="background-image: url('../assets/images/print ticket/pngimg.com - world_map_PNG28.png'); background-size:cover;">
+            <div class="flight-details">
+                <div class="details-row">
+                    <span>Trip Type:</span>
+                    <span id="tripType" style="font-size: 1.2rem;">Round-Trip</span>
+                </div>
+                <div class="details-row">
+                    <span>From:</span>
+                    <span id="from" style="font-size: 2rem;">JFK</span>
+                </div>
+                <div class="image-container">
+                    <img src="../assets/images/icons/q-removebg-preview.png" alt="" style="height:10vh;">
+                </div>
+                <div class="details-row">
+                    <span>To:</span>
+                    <span id="to" style="font-size: 2rem;">LHR</span>
+                </div>
+                <div class="details-row">
+                    <span>Departure Date:</span>
+                    <span id="departDate">July 07, 2023</span>
+                </div>
+                <div class="details-row">
+                    <span>Departure Time:</span>
+                    <span id="departTime">10:30 AM</span>
+                </div>
+                <div class="details-row">
+                    <span>Return Date:</span>
+                    <span id="returnDate">July 14, 2023</span>
+                </div>
+                <div class="details-row">
+                    <span>Return Time:</span>
+                    <span id="returnTime">2:30 PM</span>
+                </div>
+                <div class="details-row">
+                    <span>No. of Passengers:</span>
+                    <span id="passengerCount">1</span>
+                </div>
+            </div>
+            <div class="passenger-details">
+                <div class="details-row">
+                    <span>Name:</span>
+                    <span id="passengerName">John Doe</span>
+                </div>
+                <div class="details-row">
+                    <span>Email:</span>
+                    <span id="email">johndoe@example.com</span>
+                </div>
+                <div class="details-row">
+                    <span>Phone:</span>
+                    <span id="phone">+123456789</span>
+                </div>
+                <div class="details-row">
+                    <span>Nationality:</span>
+                    <span id="nationality">American</span>
+                </div>
+                <div class="details-row">
+                    <span>Country:</span>
+                    <span id="country">USA</span>
+                </div>
+                <div class="details-row">
+                    <span>City:</span>
+                    <span id="city">New York</span>
+                </div>
+            </div>
+        </div>
+        <div class="barcode">
+            <img src="../assets/images/print ticket/49681292_9185593.png" alt="Barcode">
+        </div>
+    </div>
+
+    <script>
+        function displayTicketInfo() {
+            // Retrieve the ticket data from localStorage
+            const tickets = JSON.parse(localStorage.getItem('fields'));
+
+            if (tickets && tickets.length > 0) {
+                const ticket = tickets[0]; // Assuming only one ticket, using the first one
+
+                // Trip Type
+                let tripType = "";
+                if (ticket.round) tripType = "Round-Trip";
+                if (ticket.oneway) tripType = "One-Way";
+                if (ticket.multi) tripType = "Multi-City";
+                document.getElementById("tripType").textContent = tripType;
+
+                // Flight details
+                document.getElementById("from").textContent = ticket.frmwhere;
+                document.getElementById("to").textContent = ticket.towhere;
+                document.getElementById("departDate").textContent = ticket.departdate;
+                document.getElementById("departTime").textContent = ticket.departtime;
+                document.getElementById("returnDate").textContent = ticket.returndate || "N/A";
+                document.getElementById("returnTime").textContent = ticket.returntime || "N/A";
+                document.getElementById("passengerCount").textContent = ticket.noofpass;
+
+                // Passenger details
+                document.getElementById("passengerName").textContent = `${ticket.fname} ${ticket.mdname} ${ticket.ltname}`;
+                document.getElementById("email").textContent = ticket.email;
+                document.getElementById("phone").textContent = ticket.phone;
+                document.getElementById("nationality").textContent = ticket.nationality;
+                document.getElementById("country").textContent = ticket.country;
+                document.getElementById("city").textContent = ticket.citi;
+            }
+        }
+
+        // Call the function to display the data
+        displayTicketInfo();
+    </script>
+</body>
+
+</html>

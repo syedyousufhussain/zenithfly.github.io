@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="icon" href="../assets/images/icons/favicon.png" type="image/png">
+    <!-- Bootstrap Links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- Font Awesome Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Book Ticket</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-image: url('../assets/images/book tickets/Flexjet-Bacalar-G650-1-min-scaled-e1666627182990.jpg');
+            background-size: auto;
+        }
+
+        /* Navbar */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.3rem 10%;
+            background: rgba(2, 6, 49, 0.778);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(40px);
+            z-index: -1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(247, 245, 245, 0.6), transparent);
+            transition: .5s;
+        }
+
+        .header:hover::after {
+            left: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: purple;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .navbar a {
+            font-size: 1.15rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 4rem;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .icons {
+            position: absolute;
+            right: 5%;
+            font-size: 2.8rem;
+            color: white;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .header {
+                padding: 1.3rem 5%;
+                background: rgba(2, 7, 61, 0.778);
+                height: 10vh;
+            }
+
+            .navbar {
+                margin-left: 14rem;
+            }
+
+            .navbar a {
+                color: white;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .header {
+                padding: 1.3rem 5%;
+                background-color: #04042e;
+                height: 10vh;
+            }
+
+            .logo {
+                color: white;
+            }
+
+            .navbar {
+                margin-left: 12rem;
+            }
+
+            .navbar a {
+                color: white;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .icons {
+                display: inline-flex;
+            }
+
+            #check:checked~.icons #menu-icon {
+                display: none;
+            }
+
+            #check:checked~.icons #close-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(1, 3, 24, 0.3);
+                backdrop-filter: blur(40px);
+                box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transition: 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #check:checked~.navbar {
+                height: 17.7rem;
+            }
+
+            .navbar a {
+                font-size: 1.1rem;
+                margin: 1rem 0;
+                text-align: center;
+                color: white;
+                transition: .3s ease;
+            }
+
+            #check:checked~.navbar a {
+                transform: translateY(0);
+                transition-delay: calc(.15s * var(--i));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header::before {
+                background: rgba(0, 1, 24);
+                backdrop-filter: blur(40px);
+            }
+
+            .icons {
+                display: inline-flex;
+            }
+
+            #check:checked~.icons #menu-icon {
+                display: none;
+            }
+
+            #check:checked~.icons #close-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(2, 7, 61, 0.778);
+                backdrop-filter: blur(40px);
+                box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transition: 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #check:checked~.navbar {
+                height: 17.7rem;
+            }
+
+            .navbar a {
+                font-size: 1.1rem;
+                margin: 1rem 0;
+                text-align: center;
+                color: white;
+                transition: .3s ease;
+            }
+
+            #check:checked~.navbar a {
+                transform: translateY(0);
+                transition-delay: calc(.15s * var(--i));
+            }
+        }
+
+        @media only screen and (min-width: 320px) {}
+
+        @media only screen and (min-width: 480px) {}
+
+        @media only screen and (min-width: 768px) {}
+
+        @media only screen and (min-width: 1024px) {
+
+            /* book tickets section */
+            .back-img {
+                background-color: rgba(255, 255, 255, 0.5);
+                /* backdrop-filter: blur(4px); */
+                border-radius: 0.5rem;
+                padding: 2rem;
+                margin-left: 2rem;
+                width: 80rem;
+                height: 140vh;
+                color: black !important;
+            }
+            .head-title {
+                color: rgb(2, 2, 2);
+                font-size: 4rem;
+                font-weight: 800;
+                font-family: "Calibri";
+                text-align: center;
+                margin-top: 5rem;
+            }
+
+            .head-title:hover {
+                backdrop-filter: blur(10px);
+                color: black;
+                transition: 0.7s ease;
+            }
+
+            .eml,
+            .pwd {
+
+                padding: 1rem;
+                border: none;
+                width: 20rem;
+                border-radius: 4rem;
+                margin-top: 1rem;
+                margin-left: 3rem;
+            }
+
+            .buton {
+                border-radius: 1rem;
+                border-color: transparent;
+                background-color: red;
+                color: white;
+            }
+
+            .buton:hover {
+                background-color: black;
+                border-color: transparent;
+                transform: rotateX(360deg);
+                transition: 0.7s;
+            }
+
+            .fd-frmwhere {
+                width: 20rem !important;
+                height: 6vh !important;
+                border-radius: 0.7rem;
+                border-color: transparent;
+            }
+
+            .butn {
+                margin-left: 22rem;
+                font-size: 1.2rem;
+            }
+
+            .butn:hover {
+                background-color: black;
+                transform: rotateX(360deg);
+                transition: 0.7s ease;
+            }
+        }
+
+        @media only screen and (min-width: 1200x) {}
+
+        /* Footer Section */
+        footer {
+            background-image: url('../assets/images/hmimg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section1 {
+            background-color: rgba(12, 2, 36, 0.5);
+            backdrop-filter: blur(6px);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NavBar -->
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="../assets/images/logo-removebg-preview.png" alt="logo" style="width: 7rem;">
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class="bx bx-x" id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="index.html" style="--i:0">Home</a>
+            <a href="book_flights.html" style="--i:1">Flights</a>
+            <a href="index.html" style="--i:2">About Us</a>
+            <a href="offers&Discount.html" style="--i:3">Offers & Discount</a>
+        </nav>
+    </header>
+
+    <h1 class="head-title">Flight Reservation</h1>
+
+    <div class="main">
+        <div class="back-img">
+            <form>
+                <div style="font-weight: 600; font-size: 1.2rem;">Trip Type</div>
+                <div class="mb-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="Round-Trip">
+                        <label class="form-check-label" for="inlineRadio1">Round Trip</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="One-Way">
+                        <label class="form-check-label" for="inlineRadio2">One Way Trip</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                            value="Mutli-Cities">
+                        <label class="form-check-label" for="inlineRadio2">Multi-Cities</label>
+                    </div>
+                </div>
+                <!-- flight details -->
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div style="font-weight: 600; font-size: 1.2rem;">Flight Detatils</div>
+                <div class="col mb-4" style="display: flex;">
+                    <div class="col-4">
+                        <label class="visually-hidden " for="inlineFormSelectPref">Preference</label>
+                        <select data-mdb-select-init class="select fd-frmwhere" id="frmwher">
+                            <option value="PAKISTAN ">Pakistan</option>
+                            <option value="NEW YORK">New York</option>
+                            <option value="TORONTO">Toronto</option>
+                            <option value="MALTA">Malta</option>
+                            <option value="SYDNEY">Sydeny</option>
+                            <option value="ROME">Rome</option>
+                            <option value="THAILAND">Thailand</option>
+                            <option value="DUBAI">Dubai</option>
+                        </select>
+                        <label class="form-label" for="form6Example1">From where</label>
+                    </div>
+                    <div class="col-3">
+                        <label class="visually-hidden " for="inlineFormSelectPref">Preference</label>
+                        <select data-mdb-select-init class="select fd-frmwhere" id="towher">
+                            <option value="PAKISTAN ">Pakistan</option>
+                            <option value="NEW YORK">New York</option>
+                            <option value="TORONTO">Toronto</option>
+                            <option value="MALTA">Malta</option>
+                            <option value="SYDNEY">Sydeny</option>
+                            <option value="ROME">Rome</option>
+                            <option value="THAILAND">Thailand</option>
+                            <option value="DUBAI">Dubai</option>
+                        </select>
+                        <label class="form-label" for="form6Example1">To Where</label>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="col-3 me-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="date" id="form6Example1" class="form-control" />
+                            <label class="form-label" for="form6Example1">Departure Date</label>
+                        </div>
+                    </div>
+                    <div class="col-3 me-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="time" id="form6Example2" class="form-control" />
+                            <label class="form-label" for="form6Example1">Departure Time</label>
+                        </div>
+                    </div>
+                    <div class="col-3 me-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="date" id="form6Example3" class="form-control" />
+                            <label class="form-label" for="form6Example2">Return Date</label>
+                        </div>
+                    </div>
+                    <div class="col-3 me-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="time" id="form6Example4" class="form-control" />
+                            <label class="form-label" for="form6Example1">Return Time</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Text input -->
+                <div class="col-3">
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="number" id="form6Example5" class="form-control" />
+                        <label class="form-label" for="form6Example3">No.of passengers</label>
+                    </div>
+                </div>
+                <!-- Passenger Details -->
+                <div style="font-weight: 600; font-size: 1.2rem;">Passenger Details</div>
+                <!-- Text input -->
+                <div class="col" style="display: flex;">
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 me-5">
+                        <input type="text" id="form6Example6" class="form-control" />
+                        <label class="form-label" for="form6Example4">First Name</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 me-5">
+                        <input type="text" id="form6Example7" class="form-control" />
+                        <label class="form-label" for="form6Example4">Middle Name</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4 col-3">
+                        <input type="text" id="form6Example8" class="form-control" />
+                        <label class="form-label" for="form6Example4">Last Name</label>
+                    </div>
+                </div>
+                <div data-mdb-input-init class="form-outline mb-4 col-10">
+                    <input type="text" id="form6Example9" class="form-control" />
+                    <label class="form-label" for="form6Example4">Address</label>
+                </div>
+
+                <!-- Email input -->
+                <div style="display: flex;">
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 me-5">
+                        <input type="email" id="form6Example10" class="form-control" />
+                        <label class="form-label" for="form6Example5">Email</label>
+                    </div>
+
+                    <!-- Number input -->
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 ms-5">
+                        <input type="tel" id="form6Example11" class="form-control" />
+                        <label class="form-label" for="form6Example6">Phone</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 ms-5">
+                        <label class="visually-hidden " for="inlineFormSelectPref">Preference</label>
+                        <select data-mdb-select-init class="select fd-frmwhere" id="nationality">
+                            <option value="PAKISTAN ">Pakistan</option>
+                            <option value="NEW YORK">New York</option>
+                            <option value="TORONTO">Toronto</option>
+                            <option value="MALTA">Malta</option>
+                            <option value="SYDNEY">Sydeny</option>
+                            <option value="ROME">Rome</option>
+                            <option value="THAILAND">Thailand</option>
+                            <option value="DUBAI">Dubai</option>
+                        </select>
+                        <label class="form-label" for="form6Example1">Nationality</label>
+                    </div>
+                </div>
+
+                <div style="display: flex;">
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 me-5"><label class="visually-hidden"
+                            for="inlineFormSelectPref">Preference</label>
+                        <select data-mdb-select-init class="select fd-frmwhere" id="countrySelect">
+                            <option value="">Select a country</option>
+                            <option value="Afghanistan">Afghanistan</option>
+                            <option value="Albania">Albania</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="American Samoa">American Samoa</option>
+                            <option value="Andorra">Andorra</option>
+                            <option value="Angola">Angola</option>
+                            <option value="Anguilla">Anguilla</option>
+                            <option value="Antarctica">Antarctica</option>
+                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Armenia">Armenia</option>
+                            <option value="Aruba">Aruba</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Azerbaijan">Azerbaijan</option>
+                            <option value="Bahamas">Bahamas</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belarus">Belarus</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Bermuda">Bermuda</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                            <option value="Botswana">Botswana</option>
+                            <option value="Bouvet Island">Bouvet Island</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                            <option value="Brunei Darussalam">Brunei Darussalam</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Burkina Faso">Burkina Faso</option>
+                            <option value="Burundi">Burundi</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Cape Verde">Cape Verde</option>
+                            <option value="Cayman Islands">Cayman Islands</option>
+                            <option value="Central African Republic">Central African Republic</option>
+                            <option value="Chad">Chad</option>
+                            <option value="Chile">Chile</option>
+                            <option value="China">China</option>
+                            <option value="Christmas Island">Christmas Island</option>
+                            <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Congo">Congo</option>
+                            <option value="Congo, Democratic Republic">Congo, Democratic Republic</option>
+                            <option value="Cook Islands">Cook Islands</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Curaçao">Curaçao</option>
+                            <option value="Cyprus">Cyprus</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Dominica">Dominica</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Equatorial Guinea">Equatorial Guinea</option>
+                            <option value="Eritrea">Eritrea</option>
+                            <option value="Estonia">Estonia</option>
+                            <option value="Eswatini">Eswatini</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Falkland Islands">Falkland Islands</option>
+                            <option value="Faroe Islands">Faroe Islands</option>
+                            <option value="Fiji">Fiji</option>
+                            <option value="Finland">Finland</option>
+                            <option value="France">France</option>
+                            <option value="French Guiana">French Guiana</option>
+                            <option value="French Polynesia">French Polynesia</option>
+                            <option value="French Southern Territories">French Southern Territories</option>
+                            <option value="Gabon">Gabon</option>
+                            <option value="Gambia">Gambia</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Gibraltar">Gibraltar</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Greenland">Greenland</option>
+                            <option value="Grenada">Grenada</option>
+                            <option value="Guadeloupe">Guadeloupe</option>
+                            <option value="Guam">Guam</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guernsey">Guernsey</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                            <option value="Guyana">Guyana</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Iran">Iran</option>
+                            <option value="Iraq">Iraq</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Isle of Man">Isle of Man</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Jersey">Jersey</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Kiribati">Kiribati</option>
+                            <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                            <option value="Korea, Republic of">Korea, Republic of</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                            <option value="Latvia">Latvia</option>
+                            <option value="Lebanon">Lebanon</option>
+                            <option value="Lesotho">Lesotho</option>
+                            <option value="Liberia">Liberia</option>
+                            <option value="Libya">Libya</option>
+                            <option value="Liechtenstein">Liechtenstein</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Macao">Macao</option>
+                            <option value="Madagascar">Madagascar</option>
+                            <option value="Malawi">Malawi</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Mali">Mali</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Marshall Islands">Marshall Islands</option>
+                            <option value="Martinique">Martinique</option>
+                            <option value="Mauritania">Mauritania</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Mayotte">Mayotte</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Micronesia">Micronesia</option>
+                            <option value="Moldova">Moldova</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Mongolia">Mongolia</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Mozambique">Mozambique</option>
+                            <option value="Namibia">Namibia</option>
+                            <option value="Nauru">Nauru</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="New Caledonia">New Caledonia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Niue">Niue</option>
+                            <option value="Norfolk Island">Norfolk Island</option>
+                            <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Palau">Palau</option>
+                            <option value="Palestine, State of">Palestine, State of</option>
+                            <option value="Panama">Panama</option>
+                            <option value="Papua New Guinea">Papua New Guinea</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="Pitcairn">Pitcairn</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Puerto Rico">Puerto Rico</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Réunion">Réunion</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Russian Federation">Russian Federation</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Saint Helena">Saint Helena</option>
+                            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                            <option value="Saint Lucia">Saint Lucia</option>
+                            <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                            <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                            <option value="Samoa">Samoa</option>
+                            <option value="San Marino">San Marino</option>
+                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Serbia">Serbia</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Sierra Leone">Sierra Leone</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Slovenia">Slovenia</option>
+                            <option value="Solomon Islands">Solomon Islands</option>
+                            <option value="Somalia">Somalia</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+                            <option value="South Sudan">South Sudan</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="Suriname">Suriname</option>
+                            <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Tajikistan">Tajikistan</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Timor-Leste">Timor-Leste</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Tokelau">Tokelau</option>
+                            <option value="Tonga">Tonga</option>
+                            <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Turkmenistan">Turkmenistan</option>
+                            <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                            <option value="Tuvalu">Tuvalu</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="United States">United States</option>
+                            <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                            <option value="Vanuatu">Vanuatu</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Viet Nam">Viet Nam</option>
+                            <option value="Virgin Islands, British">Virgin Islands, British</option>
+                            <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                            <option value="Wallis and Futuna">Wallis and Futuna</option>
+                            <option value="Western Sahara">Western Sahara</option>
+                            <option value="Yemen">Yemen</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                        </select>
+                        <label class="form-label" for="countrySelect">Country</label>
+                    </div>
+
+                    <!-- Number input -->
+                    <div data-mdb-input-init class="form-outline mb-4 col-3 ms-5"><label class="visually-hidden"
+                            for="citySelect">City</label>
+                        <select data-mdb-select-init class="select fd-frmwhere" id="citySelect">
+                            <option value="">Select a city</option>
+                            <option value="New York City, USA">New York City, USA</option>
+                            <option value="Los Angeles, USA">Los Angeles, USA</option>
+                            <option value="Chicago, USA">Chicago, USA</option>
+                            <option value="Houston, USA">Houston, USA</option>
+                            <option value="Miami, USA">Miami, USA</option>
+                            <option value="London, UK">London, UK</option>
+                            <option value="Bristol, UK">Bristol, UK</option>
+                            <option value="Manchester, UK">Manchester, UK</option>
+                            <option value="Glasgow, UK">Glasgow, UK</option>
+                            <option value="Paris, France">Paris, France</option>
+                            <option value="Lyon, France">Lyon, France</option>
+                            <option value="Marseille, France">Marseille, France</option>
+                            <option value="Bordeaux, France">Bordeaux, France</option>
+                            <option value="Berlin, Germany">Berlin, Germany</option>
+                            <option value="Munich, Germany">Munich, Germany</option>
+                            <option value="Hamburg, Germany">Hamburg, Germany</option>
+                            <option value="Frankfurt, Germany">Frankfurt, Germany</option>
+                            <option value="Tokyo, Japan">Tokyo, Japan</option>
+                            <option value="Osaka, Japan">Osaka, Japan</option>
+                            <option value="Kyoto, Japan">Kyoto, Japan</option>
+                            <option value="Nagoya, Japan">Nagoya, Japan</option>
+                            <option value="Sydney, Australia">Sydney, Australia</option>
+                            <option value="Melbourne, Australia">Melbourne, Australia</option>
+                            <option value="Brisbane, Australia">Brisbane, Australia</option>
+                            <option value="Perth, Australia">Perth, Australia</option>
+                            <option value="Rio de Janeiro, Brazil">Rio de Janeiro, Brazil</option>
+                            <option value="São Paulo, Brazil">São Paulo, Brazil</option>
+                            <option value="Belo Horizonte, Brazil">Belo Horizonte, Brazil</option>
+                            <option value="Salvador, Brazil">Salvador, Brazil</option>
+                            <option value="Cape Town, South Africa">Cape Town, South Africa</option>
+                            <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
+                            <option value="Durban, South Africa">Durban, South Africa</option>
+                            <option value="Beijing, China">Beijing, China</option>
+                            <option value="Shanghai, China">Shanghai, China</option>
+                            <option value="Guangzhou, China">Guangzhou, China</option>
+                            <option value="Shenzhen, China">Shenzhen, China</option>
+                            <option value="Delhi, India">Delhi, India</option>
+                            <option value="Mumbai, India">Mumbai, India</option>
+                            <option value="Bengaluru, India">Bengaluru, India</option>
+                            <option value="Kolkata, India">Kolkata, India</option>
+                            <option value="Moscow, Russia">Moscow, Russia</option>
+                            <option value="Saint Petersburg, Russia">Saint Petersburg, Russia</option>
+                            <option value="Novosibirsk, Russia">Novosibirsk, Russia</option>
+                            <option value="Yekaterinburg, Russia">Yekaterinburg, Russia</option>
+                            <option value="Lima, Peru">Lima, Peru</option>
+                            <option value="Bogotá, Colombia">Bogotá, Colombia</option>
+                            <option value="Santiago, Chile">Santiago, Chile</option>
+                            <option value="Querétaro, Mexico">Querétaro, Mexico</option>
+                            <option value="Mexico City, Mexico">Mexico City, Mexico</option>
+                            <option value="Cairo, Egypt">Cairo, Egypt</option>
+                            <option value="Giza, Egypt">Giza, Egypt</option>
+                            <option value="Tunis, Tunisia">Tunis, Tunisia</option>
+                            <option value="Ankara, Turkey">Ankara, Turkey</option>
+                            <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                            <option value="Lahore, Pakistan">Lahore, Pakistan</option>
+                            <option value="Karachi, Pakistan">Karachi, Pakistan</option>
+                            <option value="Sakarya, Turkey">Sakarya, Turkey</option>
+                            <option value="Athens, Greece">Athens, Greece</option>
+                            <option value="Thessaloniki, Greece">Thessaloniki, Greece</option>
+                            <option value="Vienna, Austria">Vienna, Austria</option>
+                            <option value="Zurich, Switzerland">Zurich, Switzerland</option>
+                            <option value="Stockholm, Sweden">Stockholm, Sweden</option>
+                            <option value="Oslo, Norway">Oslo, Norway</option>
+                            <option value="Helsinki, Finland">Helsinki, Finland</option>
+                            <option value="Dublin, Ireland">Dublin, Ireland</option>
+                            <option value="Edinburgh, Scotland">Edinburgh, Scotland</option>
+                            <option value="Glasgow, Scotland">Glasgow, Scotland</option>
+                            <option value="Brussels, Belgium">Brussels, Belgium</option>
+                            <option value="Amsterdam, Netherlands">Amsterdam, Netherlands</option>
+                            <option value="Luxembourg City, Luxembourg">Luxembourg City, Luxembourg</option>
+                            <option value="Monaco, Monaco">Monaco, Monaco</option>
+                            <option value="Liechtenstein, Liechtenstein">Liechtenstein, Liechtenstein</option>
+                            <option value="Andorra la Vella, Andorra">Andorra la Vella, Andorra</option>
+                        </select>
+                        <label class="form-label" for="citySelect">City</label>
+
+                    </div>
+                </div>
+                <!-- Submit button -->
+                <button data-mdb-ripple-init type="button" class="btn btn-danger btn-block mb-2 col-4 butn"
+                    onclick="bookTicket()">Generate
+                    Ticket</button>
+            </form>
+        </div>
+        <script>
+            // for sending ticket info
+            function bookTicket() {
+                // trip types
+                var round = document.getElementById('inlineRadio1').checked ? document.getElementById('inlineRadio1').value : '';
+                var oneway = document.getElementById('inlineRadio2').checked ? document.getElementById('inlineRadio2').value : '';
+                var multi = document.getElementById('inlineRadio3').checked ? document.getElementById('inlineRadio3').value : '';
+                
+                // flight details
+                var frmwhere = document.getElementById('frmwher').value;
+                var towhere = document.getElementById('towher').value; // Added .value to correctly get the value
+                var departdate = document.getElementById('form6Example1').value;
+                var departtime = document.getElementById('form6Example2').value;
+                var returndate = document.getElementById('form6Example3').value;
+                var returntime = document.getElementById('form6Example4').value;
+                var noofpass = document.getElementById('form6Example5').value; // Fixed typo here (docuemnt -> document)
+                
+                // passenger details
+                var fname = document.getElementById('form6Example6').value;
+                var mdname = document.getElementById('form6Example7').value;
+                var ltname = document.getElementById('form6Example8').value;
+                var address = document.getElementById('form6Example9').value;
+                var email = document.getElementById('form6Example10').value;
+                var phone = document.getElementById('form6Example11').value;
+                var nationality = document.getElementById('nationality').value; // Fixed typo here (documet -> document)
+                var country = document.getElementById('countrySelect').value; // Fixed typo here (documemnt -> document)
+                var citi = document.getElementById('citySelect').value; // Fixed typo here (documemnt -> document)
+                
+                var fields = {
+                    round: round,
+                    oneway: oneway,
+                    multi: multi,
+                    frmwhere: frmwhere,
+                    towhere: towhere,
+                    departdate: departdate,
+                    departtime: departtime,
+                    returndate: returndate,
+                    returntime: returntime,
+                    noofpass: noofpass,
+                    fname: fname,
+                    mdname: mdname,
+                    ltname: ltname,
+                    address: address,
+                    email: email,
+                    phone: phone,
+                    nationality: nationality,
+                    country: country,
+                    citi: citi
+                };
+                
+                var tickets = [];
+                tickets.push(fields);
+                localStorage.setItem('fields', JSON.stringify(tickets));
+                window.location.href = 'print_tickets.html'; // Fixed typo here (loaction -> location)
+            }
+        </script>
+        
+        <!-- Footer -->
+        <footer class="text-center text-lg-start bg-body-tertiary text-muted mt-5">
+            <div class="section1">
+                <!-- Section: Social media -->
+                <section class="d-flex justify-content-center justify-content-lg-between p-4">
+                    <!-- Left -->
+                    <div class="me-5 d-none d-lg-block">
+                        <span>Get connected with us on social networks:</span>
+                    </div>
+                    <!-- Right -->
+                    <div>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="me-4 text-reset">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </section>
+                <!-- Section: Links -->
+                <section>
+                    <div class="container text-center text-md-start mt-0.1">
+                        <!-- Grid row -->
+                        <div class="row mt-3">
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                <!-- Content -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="fa-solid fa-plane"
+                                        style="transform: rotate(-18deg);color:rgb(248, 248, 250);padding-top:1rem;padding-bottom:2rem;margin-right: 1rem;"></i>Zenith
+                                    Fly
+                                </h6>
+                                <p>
+                                    Zenith Airline's commitment to passenger satisfaction transforms every flight into a
+                                    personalized and delightful journey.
+                                </p>
+                            </div>
+                            <!-- Grid column -->
+
+                            
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    Useful links
+                                </h6>
+                                <p><a href="#!" class="text-reset">Pricing</a></p>
+                                <p><a href="#!" class="text-reset">Flights</a></p>
+                                <p><a href="#!" class="text-reset">Popular Destination</a></p>
+                                <p><a href="#!" class="text-reset">Vision & Mission</a></p>
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                                <p><i class="fas fa-home me-1"></i> Own Plaza, E-7, Nazimabad#1, Karachi, Pakistan</p>
+                                <p><i class="fas fa-envelope me-3"></i> yousuf2312f@aptechsite.net</p>
+                                <p><i class="fas fa-phone me-3"></i> 03 212 751 14</p>
+                                <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Copyright -->
+                <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                    © 2024 Copyright: Syed Yousuf Hussain
+                </div>
+            </div>
+        </footer>
+</body>
+
+</html>

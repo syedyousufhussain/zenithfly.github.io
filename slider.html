@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <title>Document</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .swiper-container {
+            width: 100%;
+            padding: 20px 0;
+            position: relative;
+            margin-top: 15rem;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .review-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .review-card p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .review-card span {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Custom styling for Swiper pagination */
+        .swiper-pagination {
+            display: flex;
+            position: relative;
+            margin-top: 4rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .swiper-pagination {
+                margin-left: 11rem;
+            }
+        }
+
+        @media only screen and (min-width: 600px) {
+            .swiper-pagination {
+                margin-left: 19rem;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .swiper-pagination {
+                margin-left: 24rem;
+            }
+        }
+
+        @media only screen and (min-width: 992px) {
+            .swiper-pagination {
+                margin-left: 35rem;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            .swiper-pagination {
+                margin-left: 38rem;
+            }
+        }
+
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            /* Customize bullet color */
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #0056b3;
+            /* Customize active bullet color */
+        }
+
+        /* Adjust navigation buttons to be vertically centered with the slides */
+        .swiper-button-next,
+        .swiper-button-prev {
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+            /* Customize arrow color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Great product! Highly recommend."</p>
+                    <span>- Customer Name 1</span>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="review-card">
+                    <p>"Excellent customer service."</p>
+                    <span>- Customer Name 2</span>
+                </div>
+            </div>
+
+            <!-- Add more slides as needed -->
+        </div>
+
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- Add Navigation -->
+        <!-- <div class="swiper-button-next"></div> -->
+        <!-- <div class="swiper-button-prev"></div> -->
+    </div>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                992: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                },
+            },
+        });
+    </script>
+
+</body>
+
+</html>

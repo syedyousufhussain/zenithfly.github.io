@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="icon" href="../assets/images/icons/favicon.png" type="image/png">
+    <title>Offers & Discounts</title>
+    <!-- for Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* navbar */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.3rem 10%;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            background: rgba(2, 6, 49, 0.778);
+            /* background:rgba(0,0,0,0.1); */
+            /* backdrop-filter: blur(2px); */
+            display: flex;
+            /* justify-content: space-around; */
+            align-items: center;
+            z-index: 100;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: rgba(247, 245, 245, 0.6); */
+            backdrop-filter: blur(40px);
+            z-index: -1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(247, 245, 245, 0.6), transparent);
+            transition: .5s;
+        }
+
+        .header:hover::after {
+            left: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: purple;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+
+        .navbar a {
+            font-size: 1.15rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 4rem;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .icons {
+            position: absolute;
+            right: 5%;
+            font-size: 2.8rem;
+            color: white;
+            cursor: pointer;
+            display: none;
+            background-color: transparent;
+            border: none;
+        }
+
+        /* Breakpoint */
+        @media (min-width:1200px) {
+            .header {
+                padding: 1.3rem 5%;
+                background: rgba(2, 7, 61, 0.778);
+                height:10vh;
+            }
+            .navbar{
+                margin-left: 14rem;
+            }
+            .navbar a{
+                color: white;
+            }
+        }
+        @media (min-width:992px) {
+            .header {
+                padding: 1.3rem 5%;
+                background-color: #04042e;
+                height:10vh;
+            }
+            .logo {
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        /* .loGo{
+            
+        } */
+            .navbar {
+                margin-left:12rem;
+                
+            }
+            .navbar a{
+                padding-left: -60rem;
+                color:white;
+            }
+        }
+
+        @media (min-width:600px) and(max-width:768px) {
+            .header::before {
+
+                background: rgba(2, 7, 61, 0.778);
+                backdrop-filter: blur(40px);
+            }
+
+            .icons {
+                display: inline-flex;
+            }
+
+            #check:checked~.icons #menu-icon {
+                display: none;
+            }
+
+            .icons #close-icon {
+                display: none;
+            }
+
+            .icons #close-icon {
+                display: none;
+            }
+
+            #check:checked~.icons #close-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgb(1, 3, 24,0.3);
+                backdrop-filter: blur(40px);
+                box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transition: 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #check:checked~.navbar {
+                height: 17.7rem;
+
+            }
+
+            .navbar a {
+                font-size: 1.1rem;
+                margin: 1rem 0;
+                text-align: center;
+                transition: .3s ease;
+                color: white;
+            }
+
+            #check:checked~.navbar a {
+                transform: translateY(0);
+                transition-delay: calc(.15s *var(--i));
+            }
+        }@media (max-width:600px) {
+            .header::before {
+
+                background: rgba(0, 1, 24);
+                backdrop-filter: blur(40px);
+            }
+
+            .icons {
+                display: inline-flex;
+            }
+
+            #check:checked~.icons #menu-icon {
+                display: none;
+            }
+
+            .icons #close-icon {
+                display: none;
+            }
+
+            .icons #close-icon {
+                display: none;
+            }
+
+            #check:checked~.icons #close-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(2, 7, 61, 0.778);
+                backdrop-filter: blur(40px);
+                box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transition: 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #check:checked~.navbar {
+                height: 17.7rem;
+
+            }
+
+            .navbar a {
+                font-size: 1.1rem;
+                margin: 1rem 0;
+                text-align: center;
+                transition: .3s ease;
+                color: white;
+            }
+
+            #check:checked~.navbar a {
+                transform: translateY(0);
+                transition-delay: calc(.15s *var(--i));
+            }
+        }
+        @media only screen and (min-width: 320px) {}
+        @media only screen and (min-width: 480px) {}
+        @media only screen and (min-width: 768px) {}
+        @media only screen and (min-width: 1024px) {
+            .title-head{
+                margin-top: 8rem;
+                text-align: center;
+                font-size: 3rem;
+                font-family: 'Calibri';
+                /* font-weight:  */
+                /* font-style: italic; */
+            }
+            .gen-crd:hover{
+                background-color: rgb(2, 2, 35);
+                padding:1rem;
+                transition: 0.7s;
+            }
+            .main-crd{
+                margin-top: 3rem;
+                padding: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .main-crd:hover{
+                /* padding:5rem!important; */
+                transition:0.7s;
+            }
+            .sub-crd{
+                margin:1rem;
+                border: none;
+                background-color: rgb(3, 2, 51);
+                color: white;
+                width: 80rem;
+                border-width: 0.1rem;
+                border-style: solid;
+                border-color: rgb(255, 255, 255);
+            }
+            .sub-crd:hover{
+                background-color: white;
+                color: black;
+                transition: 0.7s;
+            }
+            .crd-img{
+                width:25rem!important;
+                height:25vh;
+                /* padding: 3rem 1rem 1rem 1rem; */
+                /* padding-top: 1rem; */
+            }
+            .kepu_mov{
+              margin-bottom: 4rem;
+            }
+            .kepu_pic{
+                margin-left: 1%;
+                margin-top: 2%;
+                margin-bottom: 4%;
+                width: 40rem;
+                height: 45h;
+            }
+            .kepu_pic:hover{
+                transform: rotateY(360deg);
+                transition: 3s ease;
+            }
+            .kepu_crd:hover{
+                transform: rotateX(-360deg);
+                transition: 2s ease;
+
+            }
+            .kepu_params{
+              margin-right: 5rem;
+              /* margin-bottom: 20rem; */
+                float: right;
+                padding: 2rem;
+                
+            }
+            .kepu_params:hover{
+                transition: 0.7s;
+            }
+            .kepu_pic2{
+              width:5rem;
+              height:11.5vh;
+              margin-top: 2.5rem;
+              margin-left: 4rem;
+            }
+            
+            .kepu_crd{
+              border:none;
+            }
+            .kepu_crd:hover{
+                color: white;
+                background-color:rgb(20, 2, 57);
+                /* transition: 1s; */
+            }
+            footer {
+                background-image: url('../assets/images/hmimg.jpg');
+                background-size: cover;
+                background-position: center;
+            }
+            .section1{
+                background-color: rgb(12, 2, 36,0.5);
+                backdrop-filter: blur(4px);
+                color: white;
+            }
+          }
+        
+        @media only screen and (min-width: 1200x) {
+                
+            }
+    </style>
+</head>
+<body>
+    <!-- NavBar -->
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="../assets/images/logo-removebg-preview.png" alt="logo" style="width: 7rem;">
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class="bx bx-x" id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="index.html" style="--i:0">Home</a>
+            <a href="book_flights.html" style="--i:1">Flights</a>
+            <a href="index.html" style="--i:2">About Us</a>
+            <a href="#" style="--i:3">Offers & Discount</a>
+        </nav>
+    </header>
+    <h1 class="title-head" style="font-family: 'Calibri'; font-weight: 800;">Offers & Discounts</h1>
+    <div class="gen-crd">
+    <div class="main-crd">
+        <div class="card mb-3 sub-crd" style="max-width: 420px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="../assets/images/offers&discounts/unnamed.png" class="img-fluid rounded-start crd-img" alt="bank image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">15% Off Flight Mode One</h5>
+                  <p class="card-text">Upto 7,500 PKR Off using Alflah Bank Card.Coupon Code:SCINTL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3 sub-crd" style="max-width: 420px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="../assets/images/offers&discounts/Plane.jpeg" class="img-fluid rounded-start crd-img" alt="bank image">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Flat 12% OFF* On Domestic Flights</h5>
+                    <p class="card-text">Valid on HBL Bank Credit & Debit Card</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3 sub-crd" style="max-width: 420px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="../assets/images/offers&discounts/Meezan-Bank-CaseStudy-Logo.jpg" class="img-fluid rounded-start crd-img" alt="bank image">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Grab NOW:FLAT 15% On Domestic Flights!</h5>
+                      <p class="card-text">Valid on Mezzan Bank Credit Cards.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+              <div class="main-crd">
+                  <div class="card mb-3 sub-crd" style="max-width: 420px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="../assets/images/offers&discounts/479121921.jpg" class="img-fluid rounded-start crd-img" alt="bank image">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">TTM Beach Resort Canada</h5>
+                            <p class="card-text">Book TTM Hotels With Us And Get Best Deals</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card mb-3 sub-crd" style="max-width: 420px;">
+                        <div class="row g-0">
+                          <div class="col-md-4">
+                            <img src="../assets/images/offers&discounts/sunset-view-airplane-on-airport-600nw-1889546404.jpg" class="img-fluid rounded-start crd-img" alt="bank image">
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title">First Time Flight Booking Offer</h5>
+                              <p class="card-text">Get Up To PKR 3000 OFF On Online Flight Booking.</p>                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mb-3 sub-crd" style="max-width: 420px;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                              <img src="../assets/images/offers&discounts/iStock-1484200613.jpg" class="img-fluid rounded-start crd-img" alt="bank image">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">Holiday Package Booking Offer</h5>
+                                <p class="card-text">Get Up To 20% Off On Holiday Package Booking.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    </div>
+    </div>
+    <div class="kepu_mov">
+        <h2 style="text-align: center;font-family:'Calibri' ;font-weight: 700;margin-top: 8rem;margin-bottom: 4rem; font-size: 3rem;">Here to Help You on the Move</h2>
+        <img src="../assets/images/offers&discounts/New Microsoft Office PowerPoint Presentation (2).png" class="img-fluid rounded-start kepu_pic" alt="bank image">
+        <div class="kepu_params">
+            <div class="card mb-3 kepu_crd" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="../assets/images/offers&discounts/world-removebg-preview.png" class="img-fluid rounded-start kepu_pic2" alt="...">
+                    <!-- <i class="fa-solid fa-earth-americas"></i> -->
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Change or Cancel a Trip.</h5>
+                      <p class="card-text">Make Updates to your ininerary or cancel a booking.</p>
+                      <a href="#" class="btn btn-primary">Change/Cancel Trip</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-3 kepu_crd" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="../assets/images/offers&discounts/coupon_code-removebg-preview.png" class="img-fluid rounded-start kepu_pic2" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Use a Credit or Coupon</h5>
+                        <p class="card-text">Apply a coupon code or credit to a new trip.</p>
+                        <a href="#" class="btn btn-primary">Coupon Code</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-3 kepu_crd" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="../assets/images/offers&discounts/refund-removebg-preview.png" class="img-fluid rounded-start kepu_pic2" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Track Your Refund</h5>
+                          <p class="card-text">Check the status of the refund currently in progress.</p>
+                          <a href="#" class="btn btn-primary">Refund Coupon</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+    </div>
+    <!-- Footer -->
+     <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+        <div class="section1">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 ">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+        <div class="section1"></div>
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-0.1">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fa-solid fa-plane"
+                                style="transform: rotate(-18deg);color:rgb(248, 248, 250);padding-top:1rem;padding-bottom:2rem;margin-right: 1rem;"></i>Zenith
+                            Fly
+                        </h6>
+                        <p>
+                            Zenith Airline's commitment to passenger satisfaction transforms every flight into a
+                            personalized and delightful journey.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Flights</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Popular Destination</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vision & Mission</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-1"></i> Own Plaza,E-7,Nazimabad#1,Karachi,Pakistan</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            yousuf2312f@aptechsite.net
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> 03 212 751 14</p>
+                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024 Copyright: Syed Yousuf Hussain
+            <!-- <a class="text-reset fw-bold" style="decoration:none;">Syed Yousuf Hussain</a> -->
+        </div>
+        <!-- Copyright -->
+    </div>
+    </footer>
+    <!-- Footer -->
+</body>
+</html>
